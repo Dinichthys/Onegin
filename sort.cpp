@@ -12,11 +12,7 @@ static int my_strcmp (char* s1, char* s2, const bool reverse)
     ASSERT(s1 != NULL, "Invalid argument for function my_strcmp\n");
     ASSERT(s2 != NULL, "Invalid argument for function my_strcmp\n");
 
-    int step = 1;
-    if (reverse)
-    {
-        step = -1;
-    }
+    int step = reverse ? -1 : 1;
 
     while (!(isalpha (*s1)))
     {
@@ -33,17 +29,7 @@ static int my_strcmp (char* s1, char* s2, const bool reverse)
         s2 += step;
     }
 
-    if (tolower(*s1) == tolower(*s2))
-    {
-        return 0;
-    }
-
-    if (tolower(*s1) - tolower(*s2) < 0)
-    {
-        return -1;
-    }
-
-    return 1;
+    return tolower(*s1) - tolower(*s2);
 }
 
 void sort (char** arr, const size_t count, const bool reverse)
@@ -54,7 +40,7 @@ void sort (char** arr, const size_t count, const bool reverse)
     {
         for (size_t j = i + 1; j < count; j++)
         {
-            if (my_strcmp (arr [i], arr [j], reverse) == 1)
+            if (my_strcmp (arr [i], arr [j], reverse) > 0)
             {
                 char* change = arr [i];
                                arr [i] = arr [j];
