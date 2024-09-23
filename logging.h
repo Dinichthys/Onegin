@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <time.h>
 
-#define LOG(stream, level, format, ...)                                                                  \
-    do                                                                                           \
-    {                                                                                            \
-        time_t seconds = time (NULL);                                                            \
-        Log ({(stream), __FILE__, __func__, __LINE__, localtime(&seconds)}, level, format, __VA_ARGS__); \
+#define LOG(level, ...)                                                                  \
+    do                                                                                                   \
+    {                                                                                                    \
+        time_t seconds = time (NULL);                                                                    \
+        Log ({__FILE__, __func__, __LINE__, localtime(&seconds)}, level, __VA_ARGS__); \
     } while (0)
 
 enum LEVEL_LOG
@@ -21,8 +21,6 @@ enum LEVEL_LOG
 
 struct logging
 {
-    FILE* set;
-
     const char* const file;
 
     const char* const func;
@@ -33,6 +31,7 @@ struct logging
 };
 
 void set_log_lvl (const enum LEVEL_LOG level);
+void set_log_file (FILE* const file);
 void Log (const struct logging parameter, const enum LEVEL_LOG level, const char * const format, ...);
 
 #endif // LOGGING_H

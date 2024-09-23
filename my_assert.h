@@ -2,6 +2,7 @@
 #define MY_ASSERT_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "print_error.h"
 #include "logging.h"

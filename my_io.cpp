@@ -3,6 +3,7 @@
 
 #include "my_io.h"
 #include "my_assert.h"
+#include "logging.h"
 #include "helpful.h"
 #include "line_info.h"
 
@@ -16,6 +17,13 @@ enum RESULT_OF_FUNC read_file (FILE* const stream, struct line_info* const strin
 {
     ASSERT(stream != NULL, "Invalid argument for read_file\n");
     ASSERT(string != NULL, "Invalid argument for read_file\n");
+
+    LOG(INFO, "to function read_file:\n"
+              " stream = %p\n"
+              " .line = %p\n .start_of_lines = %p\n .end_of_lines = %p\n"
+              " .real_number_lines = %lu\n .predicted_number_lines = %lu\n",
+              stream, string->line, string->start_of_lines, string->end_of_lines,
+              string->real_number_lines, string->predicted_number_lines);
 
     size_t num_elem = get_len_file (stream);
     string->line = (char*) calloc (num_elem + 2, sizeof (char));
@@ -95,6 +103,10 @@ void my_fwrite (FILE* const stream, char* arr [], const size_t count, const bool
     ASSERT(stream != NULL, "Invalid argument for my_fwrite\n");
     ASSERT(arr    != NULL, "Invalid argument for my_fwrite\n");
 
+    LOG(INFO, "Parameters for function my_fwrite:\n"
+              " arr = %p\n count = %lu\n reverse = %lu\n",
+              arr, count, reverse);
+
     for (size_t i = 0; i < count; i++)
     {
         if (reverse)
@@ -115,6 +127,10 @@ enum RESULT_OF_FUNC my_fwrite_all_sort (FILE* const stream, char* arr_start [], 
     ASSERT(stream    != NULL, "Invalid argument for my_fwrite_all_sort\n");
     ASSERT(arr_start != NULL, "Invalid argument for my_fwrite_all_sort\n");
     ASSERT(arr_end   != NULL, "Invalid argument for my_fwrite_all_sort\n");
+
+    LOG(INFO, "struct string before function my_fwrite_all_sort:\n"
+              " stream = %p\n arr_start = %p\n arr_end = %p\n count = %lu\n",
+              stream, arr_start, arr_end, count);
 
     bool* printed = (bool*) calloc (count, sizeof (bool*));
     if (printed == NULL)
