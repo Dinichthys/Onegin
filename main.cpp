@@ -9,6 +9,7 @@
 #include "line_info.h"
 #include "qsort.h"
 #include "parse_argv.h"
+#include "compare.h"
 
 static const char*  onegin                 = "Eugene_Onegin.txt";
 static const char*  sorted_onegin_straight = "Eugene_Onegin_straight.txt";

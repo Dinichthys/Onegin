@@ -2,8 +2,8 @@ CXXFLAGS= -D _DEBUG  -ggdb -g3 -D_FORTIFY_SOURCES=3 -std=c++17 -Og -Wall -Wextra
 
 all: onegin
 
-onegin: main.o my_io.o print_error.o sort.o logging.o qsort.o parse_argv.o
-	@g++ $(CXXFLAGS) main.o my_io.o print_error.o sort.o logging.o qsort.o parse_argv.o -o onegin
+onegin: main.o my_io.o print_error.o sort.o logging.o qsort.o parse_argv.o swap.o compare.o
+	@g++ $(CXXFLAGS) main.o my_io.o print_error.o sort.o logging.o qsort.o parse_argv.o swap.o compare.o -o onegin
 
 main.o: main.cpp
 	@g++ $(CXXFLAGS) -c main.cpp
@@ -25,6 +25,12 @@ qsort.o: qsort.cpp
 
 parse_argv.o: parse_argv.cpp
 	@g++ $(CXXFLAGS) -c parse_argv.cpp
+
+swap.o: swap.cpp
+	@g++ $(CXXFLAGS) -c swap.cpp
+
+compare.o: compare.cpp
+	@g++ $(CXXFLAGS) -c compare.cpp
 
 clean:
 	rm -rf *.o onegin
